@@ -12,7 +12,7 @@
         <input type="text" [formControl]="searchControl" placeholder="Search by name, username, email or company..." />
       </div>
       @if (filteredUsers().length === 0) {
-        <p class="users-list__empty">No users match your search.</p>
+        <p class="users-list__empty">No users found.</p>
       } @else {
         <table>
           <thead>
@@ -20,7 +20,7 @@
               <th>Name</th>
               <th>Username</th>
               <th>Email</th>
-              <th>Company</th>
+              <th>Company Name</th>
             </tr>
           </thead>
           <tbody>

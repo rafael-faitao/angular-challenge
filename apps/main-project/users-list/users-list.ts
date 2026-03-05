@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, signal, computed } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, take, takeUntil } from 'rxjs';
 import { User, UserService } from '@challenge-workspace/user-lib';
 
 
@@ -19,29 +19,33 @@ export class UsersList implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   error = signal<string>('');
 
-  filters = signal<Record<string, string>>({});
+  filterDictionary = signal<Record<string, string>>({});
 
   searchControl = new FormControl('');
-  private searchSub?: Subscription;
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.searchSub = this.searchControl.valueChanges.pipe(
+    this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
+      takeUntil(this.destroy$),
     ).subscribe((term: string | null) => {
-      this.filters.set({ ...this.filters(), username: (term ?? '').toLowerCase().trim() });
+      this.filterDictionary.set({ ...this.filterDictionary(), username: (term ?? '').toLowerCase().trim() });
     });
 
     this.loadUsers();
   }
 
   ngOnDestroy(): void {
-    this.searchSub?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadUsers() {
     this.loading.set(true);
-    this.userService.getAll().subscribe({
+    this.userService.getAll().pipe(
+      take(1),
+    ).subscribe({
       next: (users: User[]) => {
         this.users.set(users);
         this.loading.set(false);
@@ -54,14 +58,14 @@ export class UsersList implements OnInit, OnDestroy {
   }
 
   applyFilters(): User[] {
-    const filters = this.filters();
+    const filters = this.filterDictionary();
     const hasFilters = Object.values(filters).some(v => !!v);
     if (!hasFilters) return this.users();
 
-    return this.users().filter(u =>
-      Object.entries(filters).every(([key, value]) => {
-        if (!value) return true;
-        return (u as Record<string, any>)[key]?.toLowerCase().includes(value);
+    return this.users().filter(user =>
+      Object.entries(filters).every(([property, filterValue]) => {
+        if (!filterValue) return true;
+        return (user as Record<string, any>)[property]?.toLowerCase().includes(filterValue);
       })
     );
   }
