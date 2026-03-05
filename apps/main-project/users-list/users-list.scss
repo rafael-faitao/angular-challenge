@@ -1,9 +1,41 @@
 .users-list {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
   padding: 3rem 1.5rem;
+  gap: 1.5rem;
+
+  &__controls {
+    width: 100%;
+    max-width: 900px;
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+      background: #1a1d27;
+      border: 1px solid #2d3148;
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &::placeholder {
+        color: #4a5270;
+      }
+
+      &:focus {
+        border-color: #5b6aff;
+        box-shadow: 0 0 0 3px rgba(91, 106, 255, 0.15);
+      }
+    }
+  }
+
+  &__empty {
+    color: #7c86a2;
+    font-size: 0.9rem;
+  }
 
   table {
     width: 100%;

@@ -3,28 +3,33 @@
         <p>Loading...</p>
     } @else if (error()) {
         <p>Error loading users: {{ error() }}</p>
-    } @else if (users().length === 0) {
-        <p>No users found.</p>
     } @else {
-          <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Company</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (user of users(); track user.id) {
-        <tr>
-          <td>{{ user.name }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.company.name }}</td>
-        </tr>
+      <div class="users-list__controls">
+        <input type="text" [formControl]="searchControl" placeholder="Search by name, username, email or company..." />
+      </div>
+      @if (filteredUsers().length === 0) {
+        <p class="users-list__empty">No users match your search.</p>
+      } @else {
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Company</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of filteredUsers(); track user.id) {
+              <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.company.name }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
       }
-    </tbody>
-  </table>
-}
+    }
 </div>

@@ -14,6 +14,6 @@ export class UserService {
     
   }
   getAll(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl)
+    return this.httpClient.get<User[]>(this.baseUrl);
   }
 }
