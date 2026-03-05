@@ -37,6 +37,34 @@
     font-size: 0.9rem;
   }
 
+  &__feedback {
+    width: 100%;
+    max-width: 900px;
+    background: #1a1d27;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    padding: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__loading {
+    font-size: 0.9rem;
+    color: #7c86a2;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  &__error {
+    font-size: 0.9rem;
+    color: #ff6b6b;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; }
+    50%       { opacity: 1;   }
+  }
+
   table {
     width: 100%;
     max-width: 900px;

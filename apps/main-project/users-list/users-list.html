@@ -1,8 +1,12 @@
 <div class="users-list">
     @if (loading()) {
-        <p>Loading...</p>
+        <div class="users-list__feedback">
+          <p class="users-list__loading">Loading...</p>
+        </div>
     } @else if (error()) {
-        <p>Error loading users: {{ error() }}</p>
+        <div class="users-list__feedback">
+          <p class="users-list__error">{{ error() }}</p>
+        </div>
     } @else {
       <div class="users-list__controls">
         <input type="text" [formControl]="searchControl" placeholder="Search by name, username, email or company..." />

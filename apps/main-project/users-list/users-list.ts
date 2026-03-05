@@ -46,8 +46,8 @@ export class UsersList implements OnInit, OnDestroy {
         this.users.set(users);
         this.loading.set(false);
       },
-      error: () => {
-        this.error.set('Error loading users');
+      error: (error: Error) => {
+        this.error.set(error?.message);
         this.loading.set(false);
       }
     });

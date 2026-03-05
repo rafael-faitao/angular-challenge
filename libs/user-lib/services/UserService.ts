@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../types/User';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,10 @@ export class UserService {
   constructor(private httpClient: HttpClient) { 
     
   }
+
   getAll(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl);
+    return this.httpClient.get<User[]>(this.baseUrl).pipe(
+      catchError(() => throwError(() => new Error('An error ocurred while calling the external api')))
+    );
   }
 }
