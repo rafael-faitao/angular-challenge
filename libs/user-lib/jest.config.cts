@@ -1,8 +1,8 @@
 module.exports = {
-  displayName: 'challenge-workspace',
-  preset: '../../jest.preset.js',
+  displayName: 'user-lib',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/challenge-workspace',
+  coverageDirectory: '../../coverage/user-lib',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

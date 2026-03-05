@@ -1,26 +1,26 @@
 {
-  "name": "challenge-workspace",
+  "name": "main-project",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/challenge-workspace/src",
+  "sourceRoot": "apps/main-project/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/challenge-workspace",
-        "browser": "apps/challenge-workspace/src/main.ts",
-        "tsConfig": "apps/challenge-workspace/tsconfig.app.json",
+        "outputPath": "dist/apps/main-project",
+        "browser": "apps/main-project/src/main.ts",
+        "tsConfig": "apps/main-project/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/challenge-workspace/public"
+            "input": "apps/main-project/public"
           }
         ],
-        "styles": ["apps/challenge-workspace/src/styles.scss"]
+        "styles": ["apps/main-project/src/styles.scss"]
       },
       "configurations": {
         "production": {
@@ -51,10 +51,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "challenge-workspace:build:production"
+          "buildTarget": "main-project:build:production"
         },
         "development": {
-          "buildTarget": "challenge-workspace:build:development"
+          "buildTarget": "main-project:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,16 +66,16 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/challenge-workspace/jest.config.cts",
-        "tsConfig": "apps/challenge-workspace/tsconfig.spec.json"
+        "jestConfig": "apps/main-project/jest.config.cts",
+        "tsConfig": "apps/main-project/tsconfig.spec.json"
       }
     },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "challenge-workspace:build",
-        "staticFilePath": "dist/apps/challenge-workspace/browser",
+        "buildTarget": "main-project:build",
+        "staticFilePath": "dist/apps/main-project/browser",
         "spa": true
       }
     }

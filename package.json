@@ -2,7 +2,12 @@
   "name": "@challenge-workspace/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "ng": "nx",
+    "start": "nx serve main-project",
+    "build": "nx build main-project",
+    "test": "nx test main-project"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~21.1.0",
