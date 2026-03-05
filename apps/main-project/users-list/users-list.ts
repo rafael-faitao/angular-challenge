@@ -13,11 +13,19 @@ export class UsersList implements OnInit {
   constructor(private usersService: UserService) {}
 
   users = signal<User[]>([]);
+  loading = signal<boolean>(true);
+  error = signal<string>('');
 
   ngOnInit(): void {
-    this.usersService.getAll().subscribe((users: User[]) => {
-      this.users.set(users);
-      console.log(this.users());
+    this.usersService.getAll().subscribe({
+      next: (users: User[]) => {
+        this.users.set(users);
+        //this.loading.set(false);
+      },
+      error: (err: any) => {
+        this.error.set('Error loading users');
+        this.loading.set(false);
+      }
     });
   }
 

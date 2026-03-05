@@ -1,0 +1,52 @@
+.users-list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+
+  table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: collapse;
+    background: #1a1d27;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    thead tr {
+      background: #252836;
+
+      th {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #7c86a2;
+        border-bottom: 1px solid #2d3148;
+      }
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #1f2235;
+      transition: background 0.15s ease;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: #20233a;
+      }
+
+      td {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+        color: #cbd5e1;
+        vertical-align: middle;
+      }
+    }
+  }
+}

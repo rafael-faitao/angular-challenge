@@ -1,5 +1,12 @@
 <div class="users-list">
-  <table>
+    @if (loading()) {
+        <p>Loading...</p>
+    } @else if (error()) {
+        <p>Error loading users: {{ error() }}</p>
+    } @else if (users().length === 0) {
+        <p>No users found.</p>
+    } @else {
+          <table>
     <thead>
       <tr>
         <th>Name</th>
@@ -19,4 +26,5 @@
       }
     </tbody>
   </table>
+}
 </div>
