@@ -1,8 +1,33 @@
-# ChallengeWorkspace
+# Challenge Workspace
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This project was built as a technical assessment for an Angular developer position.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## Overview
+
+An Angular application within an Nx monorepo workspace that consumes a public REST API to display and filter user data.
+
+### Stack
+- **Angular 21** — standalone components, signals, computed, reactive forms
+- **Nx** — monorepo workspace with app/lib separation
+- **RxJS** — HTTP calls, debounce, takeUntil teardown
+
+### Architecture
+- `apps/main-project` — presentation layer only (components, routing, styling)
+- `libs/user-lib` — all business logic, services, and domain models (`UserService`, `User`, `Address`, `UserCompany`)
+
+### Features
+- Fetches users from [jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
+- Displays data in a filterable table (name, username, email, company)
+- Filter via search input with 300ms debounce, driven by a `computed()` signal
+- Loading and error states with styled feedback
+- HTTP error handling via RxJS `catchError`
+
+## Run
+
+```sh
+npx nx serve main-project
+```
+
 
 [Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 

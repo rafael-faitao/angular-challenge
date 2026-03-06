@@ -14,7 +14,7 @@
       @if (filteredUsers().length === 0) {
         <p class="users-list__empty">No users found.</p>
       } @else {
-        <table>
+        <table class="desktop-list">
           <thead>
             <tr>
               <th>Name</th>
@@ -34,6 +34,17 @@
             }
           </tbody>
         </table>
+
+        <div class="mobile-list">
+          @for (user of filteredUsers(); track user.id) {
+            <div class="mobile-list__card">
+              <div class="mobile-list__row"><span class="mobile-list__label">Name</span><span>{{ user.name }}</span></div>
+              <div class="mobile-list__row"><span class="mobile-list__label">Username</span><span>{{ user.username }}</span></div>
+              <div class="mobile-list__row"><span class="mobile-list__label">Email</span><span>{{ user.email }}</span></div>
+              <div class="mobile-list__row"><span class="mobile-list__label">Company</span><span>{{ user.company.name }}</span></div>
+            </div>
+          }
+        </div>
       }
     }
 </div>
